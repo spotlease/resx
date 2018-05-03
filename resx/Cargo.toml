@@ -1,0 +1,8 @@
+[package]
+name = "resx"
+version = "0.1.0"
+authors = ["Nick Cardin <nick@cardin.email>"]
+license = "MIT OR Apache-2.0"
+description = "A toolkit for building REST clients."
+
+[dependencies]
