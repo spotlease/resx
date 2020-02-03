@@ -29,6 +29,7 @@ fn impl_resx_path(ast: &syn::DeriveInput) -> impl ToTokens {
 pub fn resx_rb(input: TokenStream) -> TokenStream {
     let ast = parse_macro_input!(input as DeriveInput);
     let tokens = impl_resx_rb(&ast);
+    println!("{:?}", tokens.to_token_stream());
     tokens.to_token_stream().into()
 }
 
