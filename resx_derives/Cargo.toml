@@ -1,9 +1,10 @@
 [package]
 name = "resx_derives"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Nick Cardin <nick@cardin.email>"]
 license = "MIT OR Apache-2.0"
 description = "Derive macros for Resx."
+edition = "2018"
 
 [lib]
 proc-macro = true
