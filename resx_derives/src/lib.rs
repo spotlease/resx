@@ -1,21 +1,18 @@
 extern crate proc_macro;
-extern crate syn;
-#[macro_use]
-extern crate quote;
 
 use proc_macro::TokenStream;
-use quote::ToTokens;
+use syn::{parse_macro_input, DeriveInput};
+use quote::{quote, format_ident, ToTokens};
 
 #[proc_macro_derive(ResxPath)]
 pub fn resx_path(input: TokenStream) -> TokenStream {
-    let s = input.to_string();
-    let ast = syn::parse_derive_input(&s).unwrap();
+    let ast = parse_macro_input!(input as DeriveInput);
     let tokens = impl_resx_path(&ast);
     tokens.to_token_stream().into()
 }
 
 fn impl_resx_path(ast: &syn::DeriveInput) -> impl ToTokens {
-    let name = format!("{}", ast.ident);
+    let name = format_ident!("{}", ast.ident);
     quote! {
         impl ResxPath for #name {
             fn path(self) -> String {
@@ -30,14 +27,13 @@ fn impl_resx_path(ast: &syn::DeriveInput) -> impl ToTokens {
 
 #[proc_macro_derive(ResxRB)]
 pub fn resx_rb(input: TokenStream) -> TokenStream {
-    let s = input.to_string();
-    let ast = syn::parse_derive_input(&s).unwrap();
+    let ast = parse_macro_input!(input as DeriveInput);
     let tokens = impl_resx_rb(&ast);
     tokens.to_token_stream().into()
 }
 
 fn impl_resx_rb(ast: &syn::DeriveInput) -> impl ToTokens {
-    let name = format!("{}", ast.ident);
+    let name = format_ident!("{}", ast.ident);
     quote! {
         impl ResxRB for #name {}
     }
@@ -46,14 +42,13 @@ fn impl_resx_rb(ast: &syn::DeriveInput) -> impl ToTokens {
 
 #[proc_macro_derive(ResxInstanceRB)]
 pub fn resx_instance_rb(input: TokenStream) -> TokenStream {
-    let s = input.to_string();
-    let ast = syn::parse_derive_input(&s).unwrap();
+    let ast = parse_macro_input!(input as DeriveInput);
     let tokens = impl_resx_instance_rb(&ast);
     tokens.to_token_stream().into()
 }
 
 fn impl_resx_instance_rb(ast: &syn::DeriveInput) -> impl ToTokens {
-    let name = format!("{}", ast.ident);
+    let name = format_ident!("{}", ast.ident);
     quote! {
         impl ResxInstanceRB for #name {}
     }
